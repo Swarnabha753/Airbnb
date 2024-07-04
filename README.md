@@ -1,4 +1,5 @@
 WanderLust (Airbnb Clone)
+
 Welcome to the WanderLust (Airbnb Clone) project! This repository contains a full-featured web application that replicates many of the core functionalities of Airbnb. Users can create accounts, list properties, and rent properties from other users. This project demonstrates the use of several modern web technologies and follows the MVC (Model-View-Controller) design pattern.
 
 Table of Contents
@@ -22,7 +23,7 @@ Backend:
 Express.js
 MongoDB with MongoDB Atlas
 Passport for authentication
-Joi for schema validation
+JOI for schema validation
 Multer for file uploads
 cookie-parser
 method-override
