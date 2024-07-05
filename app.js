@@ -113,10 +113,6 @@ app.get("/demouser",async(req,res) => {
 
 app.use("/", userRouter);
 
-app.use("/", (req,res) => {
-    res.redirect("/listings")
-})
-
 app.route("/listings")
 .get(wrapAsync(listingController.index))
 .post( 
