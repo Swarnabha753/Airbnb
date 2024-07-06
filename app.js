@@ -7,33 +7,35 @@ if(process.env.NODE_ENV != "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Listing = require("./models/listing.js");
+// const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync.js");
+// const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const Review = require("./models/review.js");
+// const Review = require("./models/review.js");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-const {isLoggedIn, isOwner, validateListing, validateReview, isReviewAuthor} = require("./middleware.js");
-const multer = require("multer");
-const { storage } = require("./cloudConfig.js");
-const upload = multer( {storage} );
+// const {isLoggedIn, isOwner, validateListing, validateReview, isReviewAuthor} = require("./middleware.js");
+// const multer = require("multer");
+// const { storage } = require("./cloudConfig.js");
+// const upload = multer( {storage} );
 
 
 const listingController = require("./controllers/listings.js");
 const reviewController = require("./controllers/reviews.js");
 
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 
 
-const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL; 
 
 main()
 .then(() => {
@@ -53,6 +55,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
+
+
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -92,6 +96,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+
 //Middlewire for flash
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
@@ -100,68 +106,28 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/demouser",async(req,res) => {
-    let fakeUser = new User({
-        email: "student@gmail.com",
-        username:"Swarnabha"
-    });
-    let registerUser = await User.register(fakeUser, "abc@2123");
-    res.send(registerUser);
-});
+app.use("/listings",listingRouter);
+app.use("/listings/:id/reviews",reviewRouter);
+app.use("/",userRouter);
+
+// app.get("/demouser",async(req,res) => {
+//     let fakeUser = new User({
+//         email: "student@gmail.com",
+//         username:"Swarnabha"
+//     });
+//     let registerUser = await User.register(fakeUser, "abc@2123");
+//     res.send(registerUser);
+// });
 
 
 
-app.use("/", userRouter);
+// app.use("/", userRouter);
 
-app.use("/", (req,res) => {
-    res.redirect("/listings")
-})
+// app.use("/", (req,res) => {
+//     res.redirect("/listings")
+// })
 
-app.route("/listings")
-.get(wrapAsync(listingController.index))
-.post( 
-isLoggedIn,
-upload.single("listing[image]"),
-validateListing,
- wrapAsync(listingController.createListing)
-);
 
-//New Route
-app.get("/listings/new", isLoggedIn, listingController.renderNewForm);
-
-//Show , Update and delete routes
-app.route("/listings/:id")
-.get(wrapAsync(listingController.showListing))
-.put(
-isLoggedIn,
-isOwner,
-upload.single("listing[image]"),
-validateListing,
-wrapAsync(listingController.updateListing))
-.delete(
- isLoggedIn,
- isOwner,
- wrapAsync(listingController.destroyListing));
-
-//Edit Route
-app.get("/listings/:id/edit", isLoggedIn,isOwner, wrapAsync(listingController.renderEditForm));
-
-//Review
-//Post Review route
-
-app.post("/listings/:id/reviews", 
-isLoggedIn,
-validateReview,
-wrapAsync(reviewController.createReview));
-
-//Delete Review Route
-
-app.delete("/listings/:id/reviews/:reviewId",
-isLoggedIn,
-isReviewAuthor,
-  wrapAsync(reviewController.destroyReview));
-
-//Default Error if there is no such page
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
