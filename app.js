@@ -121,55 +121,55 @@ app.use("/",userRouter);
 
 
 
-app.use("/", userRouter);
+
 
 app.use("/", (req,res) => {
     res.redirect("/listings")
 })
 
-app.route("/listings")
-.get(wrapAsync(listingController.index))
-.post( 
-isLoggedIn,
-upload.single("listing[image]"),
-validateListing,
- wrapAsync(listingController.createListing)
-);
+// app.route("/listings")
+// .get(wrapAsync(listingController.index))
+// .post( 
+// isLoggedIn,
+// upload.single("listing[image]"),
+// validateListing,
+//  wrapAsync(listingController.createListing)
+// );
 
-//New Route
-app.get("/listings/new", isLoggedIn, listingController.renderNewForm);
+// //New Route
+// app.get("/listings/new", isLoggedIn, listingController.renderNewForm);
 
-//Show , Update and delete routes
-app.route("/listings/:id")
-.get(wrapAsync(listingController.showListing))
-.put(
-isLoggedIn,
-isOwner,
-upload.single("listing[image]"),
-validateListing,
-wrapAsync(listingController.updateListing))
-.delete(
- isLoggedIn,
- isOwner,
- wrapAsync(listingController.destroyListing));
+// //Show , Update and delete routes
+// app.route("/listings/:id")
+// .get(wrapAsync(listingController.showListing))
+// .put(
+// isLoggedIn,
+// isOwner,
+// upload.single("listing[image]"),
+// validateListing,
+// wrapAsync(listingController.updateListing))
+// .delete(
+//  isLoggedIn,
+//  isOwner,
+//  wrapAsync(listingController.destroyListing));
 
-//Edit Route
-app.get("/listings/:id/edit", isLoggedIn,isOwner, wrapAsync(listingController.renderEditForm));
+// //Edit Route
+// app.get("/listings/:id/edit", isLoggedIn,isOwner, wrapAsync(listingController.renderEditForm));
 
 //Review
 //Post Review route
 
-app.post("/listings/:id/reviews", 
-isLoggedIn,
-validateReview,
-wrapAsync(reviewController.createReview));
+// app.post("/listings/:id/reviews", 
+// isLoggedIn,
+// validateReview,
+// wrapAsync(reviewController.createReview));
 
-//Delete Review Route
+// //Delete Review Route
 
-app.delete("/listings/:id/reviews/:reviewId",
-isLoggedIn,
-isReviewAuthor,
-  wrapAsync(reviewController.destroyReview));
+// app.delete("/listings/:id/reviews/:reviewId",
+// isLoggedIn,
+// isReviewAuthor,
+//   wrapAsync(reviewController.destroyReview));
 
 //Default Error if there is no such page
 
