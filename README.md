@@ -1,56 +1,122 @@
-WanderLust (Airbnb Clone)
+# 🌍 WanderLust (Airbnb Clone)
 
-Welcome to the WanderLust (Airbnb Clone) project! This repository contains a full-featured web application that replicates many of the core functionalities of Airbnb. Users can create accounts, list properties, and rent properties from other users. This project demonstrates the use of several modern web technologies and follows the MVC (Model-View-Controller) design pattern.
+Welcome to **WanderLust**, a full-featured Airbnb clone! This web application allows users to create accounts, list properties, and rent properties from others. It demonstrates modern web technologies while following the **MVC (Model-View-Controller)** design pattern.
 
-Table of Contents
-Features
-Technologies Used
-Installation
-Usage
-Project Structure
-Contributing
-License
-Features
+---
 
-User Authentication: Users can create accounts and log in to manage their properties.
+## 📖 Table of Contents
+- [✨ Features](#-features)
+- [🛠 Technologies Used](#-technologies-used)
+- [📥 Installation](#-installation)
+- [🚀 Usage](#-usage)
+- [📂 Project Structure](#-project-structure)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
 
-Property Listings: Users can create, edit, and delete their own property listings.
+---
 
-Reviews: Users can leave reviews on properties they have visited.
+## ✨ Features
+✅ **User Authentication**: Secure user registration and login functionality.  
+✅ **Property Listings**: Users can create, edit, and delete their own listings.  
+✅ **Reviews & Ratings**: Users can leave feedback on properties they have visited.  
+✅ **Map Integration**: Interactive maps powered by **Mapbox** for property display.  
+✅ **Image Uploads**: Property images are stored using **Cloudinary**.  
+✅ **Responsive Design**: Fully mobile-friendly, styled with **Bootstrap**.  
 
-Map Integration: Properties are displayed on a map using Mapbox.
+---
 
-Image Uploads: Property images are uploaded and stored in Cloudinary.
+## 🛠 Technologies Used
 
-Responsive Design: The application is styled with Bootstrap for a responsive and user-friendly interface.
+### 📌 Backend:
+- **Express.js** - Web framework for Node.js
+- **MongoDB & MongoDB Atlas** - Database for storing user and property data
+- **Passport.js** - User authentication
+- **JOI** - Schema validation
+- **Multer** - File uploads
+- **cookie-parser** & **method-override**
+- **dotenv** - Environment variable management
 
-Technologies Used
+### 🎨 Frontend:
+- **EJS** - Template engine
+- **Bootstrap** - Styling framework
+- **Mapbox** - Interactive maps
 
-Backend:
+### ☁️ Cloud Services:
+- **Cloudinary** - Image hosting
+- **Render** - Deployment platform
 
-Express.js
+---
 
-MongoDB with MongoDB Atlas
+## 📥 Installation
 
-Passport for authentication
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/yourusername/WanderLust.git
+   cd WanderLust
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+3. **Set up environment variables:**
+   - Create a `.env` file and add the following:
+     ```env
+     CLOUDINARY_CLOUD_NAME=your_cloud_name
+     CLOUDINARY_API_KEY=your_api_key
+     CLOUDINARY_API_SECRET=your_api_secret
+     MAPBOX_TOKEN=your_mapbox_token
+     ```
+4. **Run the server:**
+   ```sh
+   npm start
+   ```
+5. **Visit the application:**
+   Open your browser and go to `http://localhost:3000`
 
-JOI for schema validation
+---
 
-Multer for file uploads
+## 🚀 Usage
+- **Sign up or log in** to your account.
+- **Create a property listing** with images and details.
+- **Browse and book** properties from other users.
+- **Leave reviews** after staying at a property.
 
-cookie-parser
+---
 
-method-override
+## 📂 Project Structure
+```
+WanderLust/
+│── models/         # Database schemas
+│── routes/         # Application routes
+│── views/          # EJS templates
+│── public/         # Static files (CSS, JS, Images)
+│── config/         # Configuration files
+│── app.js          # Main application file
+│── .env            # Environment variables
+│── package.json    # Dependencies and scripts
+```
 
-dotenv for environment variables
+---
 
-Frontend:
+## 🤝 Contributing
+Contributions are welcome! If you'd like to improve **WanderLust**, follow these steps:
 
-EJS for templating
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature-branch`
+3. Make your changes and commit: `git commit -m 'Add new feature'`
+4. Push to the branch: `git push origin feature-branch`
+5. Open a Pull Request!
 
-Bootstrap for styling
+---
 
-Mapbox for maps
+## 📜 License
+This project is licensed under the **MIT License**. Feel free to modify and use it as needed!
+
+---
+
+🚀 **Happy Coding & Safe Travels!** ✈️🏡
+
+
 
 Cloud Services:
 
